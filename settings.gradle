@@ -1,0 +1,8 @@
+rootProject.name = 'vlep'
+
+include "vlep-business"
+include "config-server"
+include "eureka-server"
+include "zuul"
+include "admin-server"
+include "zipkin-server"

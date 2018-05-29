@@ -1,0 +1,78 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.13.RELEASE'
+        springCloudVersion = 'Edgware.SR3'
+        adminVersion = '1.5.7'
+        swagger2Version = '2.8.0'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.anji.allways'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'idea'
+    apply plugin: 'findbugs'
+    apply plugin: 'checkstyle'
+
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    repositories {
+        mavenCentral()
+    }
+
+    buildscript {
+        ext{
+
+        }
+        repositories {
+            mavenCentral()
+        }
+        dependencyManagement {
+            imports {
+                mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+                mavenBom "de.codecentric:spring-boot-admin-server-ui:${adminVersion}"
+                mavenBom "de.codecentric:spring-boot-admin-server-ui-hystrix:${adminVersion}"
+                mavenBom "de.codecentric:spring-boot-admin-server-ui-turbine:${adminVersion}"
+                mavenBom "de.codecentric:spring-boot-admin-server-ui-login:${adminVersion}"
+                mavenBom "de.codecentric:spring-boot-admin-server-ui-activiti:${adminVersion}"
+                mavenBom "de.codecentric:spring-boot-admin-server-ui-activiti:${adminVersion}"
+                mavenBom "io.springfox:springfox-swagger2:${swagger2Version}"
+                mavenBom "io.springfox:springfox-swagger-ui:${swagger2Version}"
+            }
+        }
+    }
+    checkstyleMain {
+        enabled = false
+    }
+    checkstyleTest {
+        enabled = false
+    }
+    tasks.withType(FindBugs) {
+        reports {
+            xml.enabled = false
+            html.enabled = true
+        }
+    }
+}
