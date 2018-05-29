@@ -2,6 +2,7 @@ package com.anji.allways;
 
 import de.codecentric.boot.admin.config.EnableAdminServer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
@@ -20,11 +21,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableHystrix
 @EnableAdminServer
 public class AdminServerApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(AdminServerApplication.class, args);
     }
 
+    @Value("${security.user.name}")
+    private String username;
+    @Value("${security.user.password}")
+    private String password;
 
     @Configuration
     public static class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,7 +37,6 @@ public class AdminServerApplication {
             http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").permitAll();
             http.logout().logoutUrl("/logout");
             http.csrf().disable();
-
             http.authorizeRequests()
                     .antMatchers("/login.html", "/**/*.css", "/img/**", "/third-party/**")
                     .permitAll();
@@ -46,6 +49,6 @@ public class AdminServerApplication {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("admin").password("123456").roles("USER");
+                .withUser(username).password(password).roles("USER");
     }
 }
