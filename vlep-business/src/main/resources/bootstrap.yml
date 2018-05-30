@@ -1,5 +1,5 @@
 spring:
-  application:vlep-business
+  application: vlep-business
 spring:
   port:8081
 
@@ -7,16 +7,16 @@ spring:
 
 
 redis:
-    jedis:
-      pool:
-        max-active: 2000
-        max-idle: 500
-        min-idle: 50
-        max-wait: 100000ms
-    timeout: 3000ms
-    host: localhost
-    port: 6379
-    database: 0
+  jedis:
+    pool:
+      max-active: 2000
+      max-idle: 500
+      min-idle: 50
+      max-wait: 100000ms
+  timeout: 3000ms
+  host: localhost
+  port: 6379
+  database: 0
 
 mybatis:
   type-aliases-package: com.anji.allways.entity
