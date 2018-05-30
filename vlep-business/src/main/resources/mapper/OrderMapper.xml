@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anji.allways.dao.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.anji.allways.entity.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="src_name" jdbcType="VARCHAR" property="srcName" />
+    <result column="src_phone_number" jdbcType="VARCHAR" property="srcPhoneNumber" />
+    <result column="src_address" jdbcType="VARCHAR" property="srcAddress" />
+    <result column="src_detail_address" jdbcType="VARCHAR" property="srcDetailAddress" />
+    <result column="dest_name" jdbcType="VARCHAR" property="destName" />
+    <result column="dest_phone_number" jdbcType="VARCHAR" property="destPhoneNumber" />
+    <result column="dest_address" jdbcType="VARCHAR" property="destAddress" />
+    <result column="dest_detail_address" jdbcType="VARCHAR" property="destDetailAddress" />
+    <result column="customer_brand" jdbcType="VARCHAR" property="customerBrand" />
+    <result column="dealer_id" jdbcType="BIGINT" property="dealerId" />
+    <result column="order_type" jdbcType="TINYINT" property="orderType" />
+    <result column="shipping_type" jdbcType="TINYINT" property="shippingType" />
+    <result column="expected_price" jdbcType="DECIMAL" property="expectedPrice" />
+    <result column="actual_price" jdbcType="DECIMAL" property="actualPrice" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_update_user" jdbcType="VARCHAR" property="lastUpdateUser" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anji.allways.entity.Order">
+    insert into order (id, number, status, 
+      src_name, src_phone_number, src_address, 
+      src_detail_address, dest_name, dest_phone_number, 
+      dest_address, dest_detail_address, customer_brand, 
+      dealer_id, order_type, shipping_type, 
+      expected_price, actual_price, remark, 
+      create_time, create_user, last_update_time, 
+      last_update_user)
+    values (#{id,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{srcName,jdbcType=VARCHAR}, #{srcPhoneNumber,jdbcType=VARCHAR}, #{srcAddress,jdbcType=VARCHAR}, 
+      #{srcDetailAddress,jdbcType=VARCHAR}, #{destName,jdbcType=VARCHAR}, #{destPhoneNumber,jdbcType=VARCHAR}, 
+      #{destAddress,jdbcType=VARCHAR}, #{destDetailAddress,jdbcType=VARCHAR}, #{customerBrand,jdbcType=VARCHAR}, 
+      #{dealerId,jdbcType=BIGINT}, #{orderType,jdbcType=TINYINT}, #{shippingType,jdbcType=TINYINT}, 
+      #{expectedPrice,jdbcType=DECIMAL}, #{actualPrice,jdbcType=DECIMAL}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUser,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anji.allways.entity.Order">
+    update order
+    set number = #{number,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      src_name = #{srcName,jdbcType=VARCHAR},
+      src_phone_number = #{srcPhoneNumber,jdbcType=VARCHAR},
+      src_address = #{srcAddress,jdbcType=VARCHAR},
+      src_detail_address = #{srcDetailAddress,jdbcType=VARCHAR},
+      dest_name = #{destName,jdbcType=VARCHAR},
+      dest_phone_number = #{destPhoneNumber,jdbcType=VARCHAR},
+      dest_address = #{destAddress,jdbcType=VARCHAR},
+      dest_detail_address = #{destDetailAddress,jdbcType=VARCHAR},
+      customer_brand = #{customerBrand,jdbcType=VARCHAR},
+      dealer_id = #{dealerId,jdbcType=BIGINT},
+      order_type = #{orderType,jdbcType=TINYINT},
+      shipping_type = #{shippingType,jdbcType=TINYINT},
+      expected_price = #{expectedPrice,jdbcType=DECIMAL},
+      actual_price = #{actualPrice,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user = #{lastUpdateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, number, status, src_name, src_phone_number, src_address, src_detail_address, 
+    dest_name, dest_phone_number, dest_address, dest_detail_address, customer_brand, 
+    dealer_id, order_type, shipping_type, expected_price, actual_price, remark, create_time, 
+    create_user, last_update_time, last_update_user
+    from order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, number, status, src_name, src_phone_number, src_address, src_detail_address, 
+    dest_name, dest_phone_number, dest_address, dest_detail_address, customer_brand, 
+    dealer_id, order_type, shipping_type, expected_price, actual_price, remark, create_time, 
+    create_user, last_update_time, last_update_user
+    from order
+  </select>
+</mapper>

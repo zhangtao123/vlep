@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anji.allways.dao.LineMapper">
+  <resultMap id="BaseResultMap" type="com.anji.allways.entity.Line">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="supplier_id" jdbcType="BIGINT" property="supplierId" />
+    <result column="src_province" jdbcType="VARCHAR" property="srcProvince" />
+    <result column="src_city" jdbcType="VARCHAR" property="srcCity" />
+    <result column="src_district" jdbcType="VARCHAR" property="srcDistrict" />
+    <result column="dest_province" jdbcType="VARCHAR" property="destProvince" />
+    <result column="dest_city" jdbcType="VARCHAR" property="destCity" />
+    <result column="dest_district" jdbcType="VARCHAR" property="destDistrict" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_update_user" jdbcType="VARCHAR" property="lastUpdateUser" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from line
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anji.allways.entity.Line">
+    insert into line (id, name, supplier_id, 
+      src_province, src_city, src_district, 
+      dest_province, dest_city, dest_district, 
+      price, status, remark, 
+      create_time, create_user, last_update_time, 
+      last_update_user)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{supplierId,jdbcType=BIGINT}, 
+      #{srcProvince,jdbcType=VARCHAR}, #{srcCity,jdbcType=VARCHAR}, #{srcDistrict,jdbcType=VARCHAR}, 
+      #{destProvince,jdbcType=VARCHAR}, #{destCity,jdbcType=VARCHAR}, #{destDistrict,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, #{remark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUser,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anji.allways.entity.Line">
+    update line
+    set name = #{name,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=BIGINT},
+      src_province = #{srcProvince,jdbcType=VARCHAR},
+      src_city = #{srcCity,jdbcType=VARCHAR},
+      src_district = #{srcDistrict,jdbcType=VARCHAR},
+      dest_province = #{destProvince,jdbcType=VARCHAR},
+      dest_city = #{destCity,jdbcType=VARCHAR},
+      dest_district = #{destDistrict,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user = #{lastUpdateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, name, supplier_id, src_province, src_city, src_district, dest_province, 
+    dest_city, dest_district, price, status, remark, create_time, create_user, last_update_time, 
+    last_update_user
+    from line
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, supplier_id, src_province, src_city, src_district, dest_province, 
+    dest_city, dest_district, price, status, remark, create_time, create_user, last_update_time, 
+    last_update_user
+    from line
+  </select>
+</mapper>

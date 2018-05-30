@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anji.allways.dao.DriverMapper">
+  <resultMap id="BaseResultMap" type="com.anji.allways.entity.Driver">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="supplier_id" jdbcType="BIGINT" property="supplierId" />
+    <result column="truck_id" jdbcType="BIGINT" property="truckId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />
+    <result column="id_number" jdbcType="VARCHAR" property="idNumber" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="driving_licence_type" jdbcType="VARCHAR" property="drivingLicenceType" />
+    <result column="driving_licence_number" jdbcType="VARCHAR" property="drivingLicenceNumber" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_update_user" jdbcType="VARCHAR" property="lastUpdateUser" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from driver
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anji.allways.entity.Driver">
+    insert into driver (id, supplier_id, truck_id, 
+      name, phone_number, id_number, 
+      status, driving_licence_type, driving_licence_number, 
+      remark, create_time, create_user, 
+      last_update_time, last_update_user)
+    values (#{id,jdbcType=BIGINT}, #{supplierId,jdbcType=BIGINT}, #{truckId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{idNumber,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{drivingLicenceType,jdbcType=VARCHAR}, #{drivingLicenceNumber,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, 
+      #{lastUpdateTime,jdbcType=TIMESTAMP}, #{lastUpdateUser,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anji.allways.entity.Driver">
+    update driver
+    set supplier_id = #{supplierId,jdbcType=BIGINT},
+      truck_id = #{truckId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      id_number = #{idNumber,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      driving_licence_type = #{drivingLicenceType,jdbcType=VARCHAR},
+      driving_licence_number = #{drivingLicenceNumber,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user = #{lastUpdateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, supplier_id, truck_id, name, phone_number, id_number, status, driving_licence_type, 
+    driving_licence_number, remark, create_time, create_user, last_update_time, last_update_user
+    from driver
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, supplier_id, truck_id, name, phone_number, id_number, status, driving_licence_type, 
+    driving_licence_number, remark, create_time, create_user, last_update_time, last_update_user
+    from driver
+  </select>
+</mapper>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.anji.allways.dao.OrderContentMapper">
+  <resultMap id="BaseResultMap" type="com.anji.allways.entity.OrderContent">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="order_number" jdbcType="VARCHAR" property="orderNumber" />
+    <result column="vin" jdbcType="VARCHAR" property="vin" />
+    <result column="car_type" jdbcType="VARCHAR" property="carType" />
+    <result column="car_color" jdbcType="VARCHAR" property="carColor" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
+    <result column="last_update_user" jdbcType="VARCHAR" property="lastUpdateUser" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_content
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.anji.allways.entity.OrderContent">
+    insert into order_content (id, order_number, vin, 
+      car_type, car_color, status, 
+      create_time, create_user, last_update_time, 
+      last_update_user)
+    values (#{id,jdbcType=BIGINT}, #{orderNumber,jdbcType=VARCHAR}, #{vin,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=VARCHAR}, #{carColor,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
+      #{lastUpdateUser,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.anji.allways.entity.OrderContent">
+    update order_content
+    set order_number = #{orderNumber,jdbcType=VARCHAR},
+      vin = #{vin,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      car_color = #{carColor,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      last_update_user = #{lastUpdateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, order_number, vin, car_type, car_color, status, create_time, create_user, 
+    last_update_time, last_update_user
+    from order_content
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, order_number, vin, car_type, car_color, status, create_time, create_user, 
+    last_update_time, last_update_user
+    from order_content
+  </select>
+</mapper>
