@@ -1,9 +1,6 @@
 buildscript {
     ext {
         springBootVersion = '1.5.13.RELEASE'
-        springCloudVersion = 'Edgware.SR3'
-        adminVersion = '1.5.7'
-        swagger2Version = '2.8.0'
     }
     repositories {
         mavenCentral()
@@ -13,27 +10,25 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
 group = 'com.anji.allways'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
 
 repositories {
-    mavenLocal()
     mavenCentral()
 }
 
-
+ext {
+    springCloudVersion = 'Edgware.SR3'
+    adminVersion = '1.5.7'
+    swagger2Version = '2.8.0'
+    mybatisSpringVersion = '1.3.2'
+}
 subprojects {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'idea'
-    apply plugin: 'findbugs'
-    apply plugin: 'checkstyle'
+    apply plugin: 'eclipse'
+    apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
@@ -43,9 +38,6 @@ subprojects {
     }
 
     buildscript {
-        ext{
-
-        }
         repositories {
             mavenCentral()
         }
@@ -60,19 +52,8 @@ subprojects {
                 mavenBom "de.codecentric:spring-boot-admin-server-ui-activiti:${adminVersion}"
                 mavenBom "io.springfox:springfox-swagger2:${swagger2Version}"
                 mavenBom "io.springfox:springfox-swagger-ui:${swagger2Version}"
+                mavenBom "org.mybatis.spring.boot:mybatis-spring-boot-starter:${mybatisSpringVersion}"
             }
-        }
-    }
-    checkstyleMain {
-        enabled = false
-    }
-    checkstyleTest {
-        enabled = false
-    }
-    tasks.withType(FindBugs) {
-        reports {
-            xml.enabled = false
-            html.enabled = true
         }
     }
 }
