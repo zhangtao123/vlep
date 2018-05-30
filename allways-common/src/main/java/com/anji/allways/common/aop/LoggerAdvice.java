@@ -25,19 +25,19 @@ public class LoggerAdvice {
 
     @Before("within(com.anji.allways..*) && @annotation(loggerManage)")
     public void addBeforeLogger(JoinPoint joinPoint, LoggerManage loggerManage) {
-        LOGGER.info("执行[{}]开始", loggerManage.description());
-        LOGGER.info("获取方法签名[{}]", joinPoint.getSignature().toString());
+        LOGGER.info("执行:[{}]开始", loggerManage.description());
+        LOGGER.info("获取方法签名:[{}]", joinPoint.getSignature().toString());
         LOGGER.info("传入参数:[{}]", parseParams(joinPoint.getArgs()));
     }
 
     @AfterReturning("within(com.anji.allways..*) && @annotation(loggerManage)")
     public void addAfterReturningLogger(LoggerManage loggerManage) {
-        LOGGER.info("执行[{}]结束", loggerManage.description());
+        LOGGER.info("执行:[{}]结束", loggerManage.description());
     }
 
     @AfterThrowing(pointcut = "within(com.anji.allways..*) && @annotation(loggerManage)", throwing = "ex")
     public void addAfterThrowingLogger(LoggerManage loggerManage, Exception ex) {
-        LOGGER.error("执行[{}]发生异常", loggerManage.description(), ex);
+        LOGGER.error("执行:[{}]发生异常", loggerManage.description(), ex);
     }
 
     private String parseParams(Object[] params) {

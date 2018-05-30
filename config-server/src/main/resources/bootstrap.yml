@@ -1,0 +1,22 @@
+server:
+  port: 38100
+
+spring:
+  application:
+    name: config-server
+
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+#spring:
+#  rabbitmq:
+#    host: 10.108.10.17
+#    username: admin
+#    password: admin
