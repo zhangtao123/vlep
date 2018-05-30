@@ -18,9 +18,9 @@ import redis.clients.jedis.JedisPoolConfig;
 @Configuration
 public class JedisConfig {
 
-    @Value("${spring.redis.jedis.pool.max-idle}")
+    @Value("${spring.redis.pool.max-idle}")
     private int maxIdle;
-    @Value("${spring.redis.jedis.pool.min-idle}")
+    @Value("${spring.redis.pool.min-idle}")
     private int minIdle;
     @Value("${spring.redis.host}")
     private String host;
@@ -28,9 +28,8 @@ public class JedisConfig {
     private int port;
     @Value("${spring.redis.database}")
     private int database;
-    @Value("${spring.redis.jedis.pool.max-wait}")
-    private String maxWait;
-
+    @Value("${spring.redis.pool.max-wait}")
+    private Long maxWait;
 
     @Bean
     public JedisPoolConfig jedisPoolConfig() {
@@ -39,7 +38,7 @@ public class JedisConfig {
         jedisPoolConfig.setMinIdle(minIdle);
         jedisPoolConfig.setTestOnBorrow(true);
         jedisPoolConfig.setTestOnReturn(true);
-        jedisPoolConfig.setMaxWaitMillis(Long.parseLong(maxWait.substring(0, maxWait.length() - 2)));
+        jedisPoolConfig.setMaxWaitMillis(maxWait);
         return jedisPoolConfig;
     }
 
@@ -50,6 +49,6 @@ public class JedisConfig {
 
     @Bean
     public JedisPool jedisPool(JedisPoolConfig jedisPoolConfig) {
-        return new JedisPool(jedisPoolConfig, host, port, Integer.parseInt(maxWait.substring(0, maxWait.length() - 2)), null, database);
+        return new JedisPool(jedisPoolConfig, host, port, maxWait.intValue(), null, database);
     }
 }
