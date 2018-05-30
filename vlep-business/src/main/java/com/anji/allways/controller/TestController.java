@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 
@@ -14,6 +16,8 @@ import javax.annotation.Resource;
 public class TestController {
     @Resource
     private TestService testService;
+    @Resource
+    private JedisPool jedisPool;
 
     @GetMapping("/{id}")
     public BaseResponseModel getLineById(@PathVariable("id") Long id) {
@@ -22,5 +26,13 @@ public class TestController {
     @GetMapping("/hello/{name}")
     public BaseResponseModel hello(@PathVariable("name")String name){
         return BaseResponseModel.ofSuccessMessage("Hello "+name);
+    }
+    @GetMapping("/redis")
+    public BaseResponseModel redis(){
+        Jedis jedis = jedisPool.getResource();
+        jedis.set("测试","测试");
+        String test=jedis.get("测试");
+        jedis.close();
+        return BaseResponseModel.ofSuccessData(test);
     }
 }
