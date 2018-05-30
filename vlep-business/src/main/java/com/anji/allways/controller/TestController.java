@@ -1,6 +1,6 @@
 package com.anji.allways.controller;
 
-import com.anji.allways.entity.Line;
+import com.anji.allways.common.entity.BaseResponseModel;
 import com.anji.allways.service.TestService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,11 +16,11 @@ public class TestController {
     private TestService testService;
 
     @GetMapping("/{id}")
-    public Line getLineById(@PathVariable("id") Long id) {
-        return testService.getLineById(id);
+    public BaseResponseModel getLineById(@PathVariable("id") Long id) {
+        return BaseResponseModel.ofSuccessData(testService.getLineById(id));
     }
     @GetMapping("/hello/{name}")
-    public String hello(@PathVariable("name")String name){
-        return "Hello "+name;
+    public BaseResponseModel hello(@PathVariable("name")String name){
+        return BaseResponseModel.ofSuccessMessage("Hello "+name);
     }
 }
