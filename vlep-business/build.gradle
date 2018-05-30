@@ -3,6 +3,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jdbc')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile('org.mybatis.spring.boot:mybatis-spring-boot-starter')
-    compile ('com.zaxxer:HikariCP')
+    compile('com.zaxxer:HikariCP')
     runtime('mysql:mysql-connector-java')
+    compile('org.mybatis.generator:mybatis-generator-core')
 }
