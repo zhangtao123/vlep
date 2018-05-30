@@ -1,8 +1,6 @@
 package com.anji.allways.common.config;
 
 import com.anji.allways.common.entity.BaseResponseModel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 @RestController
 public class GlobalExceptionHandler implements ErrorController {
     private static final String ERROR_PATH = "/error";
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @Override
     public String getErrorPath() {
@@ -31,7 +28,6 @@ public class GlobalExceptionHandler implements ErrorController {
     @ExceptionHandler(Exception.class)
     public BaseResponseModel errorApiHandler(HttpServletRequest request, Exception e) {
         Integer status = getStatus(request);
-        LOGGER.error(e.getMessage());
         e.printStackTrace();
         return BaseResponseModel.ofFailedStatus(status, e.getMessage());
     }

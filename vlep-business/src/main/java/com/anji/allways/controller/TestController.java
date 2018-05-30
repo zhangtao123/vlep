@@ -1,5 +1,6 @@
 package com.anji.allways.controller;
 
+import com.anji.allways.common.aop.LoggerManage;
 import com.anji.allways.common.entity.BaseResponseModel;
 import com.anji.allways.service.TestService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +20,13 @@ public class TestController {
     @Resource
     private JedisPool jedisPool;
 
+    /**
+     * 传入参数2可以测试异常
+     * @param id 参数
+     * @return 线路信息
+     */
     @GetMapping("/{id}")
+    @LoggerManage(description = "线路查询")
     public BaseResponseModel getLineById(@PathVariable("id") Long id) {
         return BaseResponseModel.ofSuccessData(testService.getLineById(id));
     }

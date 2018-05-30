@@ -37,7 +37,7 @@ public class LoggerAdvice {
 
     @AfterThrowing(pointcut = "within(com.anji.allways..*) && @annotation(loggerManage)", throwing = "ex")
     public void addAfterThrowingLogger(LoggerManage loggerManage, Exception ex) {
-        LOGGER.error("执行:[{}]发生异常", loggerManage.description(), ex);
+        LOGGER.error("执行:[{}]发生异常:[{}]", loggerManage.description(), ex.getMessage());
     }
 
     private String parseParams(Object[] params) {
