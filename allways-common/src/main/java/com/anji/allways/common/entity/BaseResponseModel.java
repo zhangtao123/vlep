@@ -1,5 +1,7 @@
 package com.anji.allways.common.entity;
 
+import org.springframework.http.HttpStatus;
+
 import java.io.Serializable;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -43,13 +45,23 @@ public class BaseResponseModel<T> implements Serializable {
     }
 
     /**
-     * 返回一个标准http状态码（枚举类Status里有的）。通常用于处理异常，返回前台一个错误信息
+     * 返回一个项目自定义http状态码（业务枚举类Status里有的）。通常用于处理异常，返回前台一个错误信息
      *
      * @param status Http状态码
      * @return 标准响应体
      */
     public static BaseResponseModel ofStatus(Status status) {
         return new BaseResponseModel<>(status.getCode(), status.getReasonPhrase(), null);
+    }
+
+    /**
+     * 返回一个Spring官方标准http状态码（业务枚举类Status里有的）。通常用于处理异常，返回前台一个错误信息
+     *
+     * @param httpStatus Http状态码
+     * @return 标准响应体
+     */
+    public static BaseResponseModel ofHttpStatus(HttpStatus httpStatus) {
+        return new BaseResponseModel<>(httpStatus.value(), httpStatus.getReasonPhrase(), null);
     }
 
     /**
