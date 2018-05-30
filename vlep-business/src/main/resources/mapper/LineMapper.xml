@@ -19,6 +19,17 @@
     <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
     <result column="last_update_user" jdbcType="VARCHAR" property="lastUpdateUser" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, name, supplier_id, src_province, src_city, src_district, dest_province, dest_city, 
+    dest_district, price, status, remark, create_time, create_user, last_update_time, 
+    last_update_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from line
+    where id = #{id,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from line
     where id = #{id,jdbcType=BIGINT}
@@ -37,6 +48,160 @@
       #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateUser,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertSelective" parameterType="com.anji.allways.entity.Line">
+    insert into line
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="srcProvince != null">
+        src_province,
+      </if>
+      <if test="srcCity != null">
+        src_city,
+      </if>
+      <if test="srcDistrict != null">
+        src_district,
+      </if>
+      <if test="destProvince != null">
+        dest_province,
+      </if>
+      <if test="destCity != null">
+        dest_city,
+      </if>
+      <if test="destDistrict != null">
+        dest_district,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="lastUpdateUser != null">
+        last_update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="srcProvince != null">
+        #{srcProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="srcCity != null">
+        #{srcCity,jdbcType=VARCHAR},
+      </if>
+      <if test="srcDistrict != null">
+        #{srcDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="destProvince != null">
+        #{destProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="destCity != null">
+        #{destCity,jdbcType=VARCHAR},
+      </if>
+      <if test="destDistrict != null">
+        #{destDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUser != null">
+        #{lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.anji.allways.entity.Line">
+    update line
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=BIGINT},
+      </if>
+      <if test="srcProvince != null">
+        src_province = #{srcProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="srcCity != null">
+        src_city = #{srcCity,jdbcType=VARCHAR},
+      </if>
+      <if test="srcDistrict != null">
+        src_district = #{srcDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="destProvince != null">
+        dest_province = #{destProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="destCity != null">
+        dest_city = #{destCity,jdbcType=VARCHAR},
+      </if>
+      <if test="destDistrict != null">
+        dest_district = #{destDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUser != null">
+        last_update_user = #{lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.anji.allways.entity.Line">
     update line
     set name = #{name,jdbcType=VARCHAR},
@@ -56,17 +221,4 @@
       last_update_user = #{lastUpdateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, name, supplier_id, src_province, src_city, src_district, dest_province, 
-    dest_city, dest_district, price, status, remark, create_time, create_user, last_update_time, 
-    last_update_user
-    from line
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, name, supplier_id, src_province, src_city, src_district, dest_province, 
-    dest_city, dest_district, price, status, remark, create_time, create_user, last_update_time, 
-    last_update_user
-    from line
-  </select>
 </mapper>

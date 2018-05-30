@@ -25,6 +25,18 @@
     <result column="last_update_time" jdbcType="TIMESTAMP" property="lastUpdateTime" />
     <result column="last_update_user" jdbcType="VARCHAR" property="lastUpdateUser" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, number, status, src_name, src_phone_number, src_address, src_detail_address, 
+    dest_name, dest_phone_number, dest_address, dest_detail_address, customer_brand, 
+    dealer_id, order_type, shipping_type, expected_price, actual_price, remark, create_time, 
+    create_user, last_update_time, last_update_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from order
     where id = #{id,jdbcType=BIGINT}
@@ -47,6 +59,214 @@
       #{createTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{lastUpdateTime,jdbcType=TIMESTAMP}, 
       #{lastUpdateUser,jdbcType=VARCHAR})
   </insert>
+  <insert id="insertSelective" parameterType="com.anji.allways.entity.Order">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="srcName != null">
+        src_name,
+      </if>
+      <if test="srcPhoneNumber != null">
+        src_phone_number,
+      </if>
+      <if test="srcAddress != null">
+        src_address,
+      </if>
+      <if test="srcDetailAddress != null">
+        src_detail_address,
+      </if>
+      <if test="destName != null">
+        dest_name,
+      </if>
+      <if test="destPhoneNumber != null">
+        dest_phone_number,
+      </if>
+      <if test="destAddress != null">
+        dest_address,
+      </if>
+      <if test="destDetailAddress != null">
+        dest_detail_address,
+      </if>
+      <if test="customerBrand != null">
+        customer_brand,
+      </if>
+      <if test="dealerId != null">
+        dealer_id,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="shippingType != null">
+        shipping_type,
+      </if>
+      <if test="expectedPrice != null">
+        expected_price,
+      </if>
+      <if test="actualPrice != null">
+        actual_price,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createUser != null">
+        create_user,
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time,
+      </if>
+      <if test="lastUpdateUser != null">
+        last_update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="srcName != null">
+        #{srcName,jdbcType=VARCHAR},
+      </if>
+      <if test="srcPhoneNumber != null">
+        #{srcPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="srcAddress != null">
+        #{srcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="srcDetailAddress != null">
+        #{srcDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="destName != null">
+        #{destName,jdbcType=VARCHAR},
+      </if>
+      <if test="destPhoneNumber != null">
+        #{destPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="destAddress != null">
+        #{destAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="destDetailAddress != null">
+        #{destDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customerBrand != null">
+        #{customerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null">
+        #{dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="shippingType != null">
+        #{shippingType,jdbcType=TINYINT},
+      </if>
+      <if test="expectedPrice != null">
+        #{expectedPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null">
+        #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUser != null">
+        #{lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.anji.allways.entity.Order">
+    update order
+    <set>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="srcName != null">
+        src_name = #{srcName,jdbcType=VARCHAR},
+      </if>
+      <if test="srcPhoneNumber != null">
+        src_phone_number = #{srcPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="srcAddress != null">
+        src_address = #{srcAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="srcDetailAddress != null">
+        src_detail_address = #{srcDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="destName != null">
+        dest_name = #{destName,jdbcType=VARCHAR},
+      </if>
+      <if test="destPhoneNumber != null">
+        dest_phone_number = #{destPhoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="destAddress != null">
+        dest_address = #{destAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="destDetailAddress != null">
+        dest_detail_address = #{destDetailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="customerBrand != null">
+        customer_brand = #{customerBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="dealerId != null">
+        dealer_id = #{dealerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=TINYINT},
+      </if>
+      <if test="shippingType != null">
+        shipping_type = #{shippingType,jdbcType=TINYINT},
+      </if>
+      <if test="expectedPrice != null">
+        expected_price = #{expectedPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPrice != null">
+        actual_price = #{actualPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUpdateTime != null">
+        last_update_time = #{lastUpdateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastUpdateUser != null">
+        last_update_user = #{lastUpdateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
   <update id="updateByPrimaryKey" parameterType="com.anji.allways.entity.Order">
     update order
     set number = #{number,jdbcType=VARCHAR},
@@ -72,19 +292,4 @@
       last_update_user = #{lastUpdateUser,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, number, status, src_name, src_phone_number, src_address, src_detail_address, 
-    dest_name, dest_phone_number, dest_address, dest_detail_address, customer_brand, 
-    dealer_id, order_type, shipping_type, expected_price, actual_price, remark, create_time, 
-    create_user, last_update_time, last_update_user
-    from order
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, number, status, src_name, src_phone_number, src_address, src_detail_address, 
-    dest_name, dest_phone_number, dest_address, dest_detail_address, customer_brand, 
-    dealer_id, order_type, shipping_type, expected_price, actual_price, remark, create_time, 
-    create_user, last_update_time, last_update_user
-    from order
-  </select>
 </mapper>
