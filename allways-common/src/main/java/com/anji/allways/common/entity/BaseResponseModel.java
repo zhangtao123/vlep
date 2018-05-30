@@ -25,7 +25,7 @@ public class BaseResponseModel<T> implements Serializable {
     private T repData;
 
     /**
-     * 返回那些需要有返回值内容的情况，比如查询，把查询语句放入repData即可
+     * 返回那些需要有返回值内容的情况，比如查询，把查询结果放入repData即可
      *
      * @param repData 返回值内容
      * @return 标准响应体
