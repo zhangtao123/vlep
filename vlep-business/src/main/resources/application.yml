@@ -1,6 +1,9 @@
+server:
+  port: 8081
 spring:
   application:
    name: vlep-business
+
   redis:
     pool:
       max-active: 2000
@@ -11,6 +14,7 @@ spring:
     host: localhost
     port: 6379
     database: 0
+
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -23,11 +27,19 @@ spring:
       connection-timeout: 60000
       validation-timeout: 3000
       maximum-pool-size: 50
-server:
-  port: 8081
+
 mybatis:
   type-aliases-package: com.anji.allways.entity
   mapper-locations: classpath:/mapper/*.xml
 logging:
   level:
     com.anji.allways.dao: debug
+
+
+eureka:
+  instance:
+    hostname: localhost
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/

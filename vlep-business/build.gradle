@@ -6,4 +6,5 @@ dependencies {
     compile('com.zaxxer:HikariCP')
     runtime('mysql:mysql-connector-java')
     compile('org.mybatis.generator:mybatis-generator-core:1.3.6')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
 }

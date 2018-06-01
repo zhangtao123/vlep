@@ -4,36 +4,22 @@ server:
 spring:
   application:
     name: zuul
-#  sleuth:
-#    sampler:
-#      percentage: 1
-#  zipkin:
-#    baseUrl: http://10.108.10.58:9411/
-
-#  rabbitmq:
-#    host: 10.108.10.17
-#    username: admin
-#    password: admin
 
 eureka:
   instance:
     hostname: localhost
     instance-id: ${spring.cloud.client.ipAddress}:${server.port}
   client:
-    serviceUrl: defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
 
-hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000
-
+#zuul中默认的路由地址
 zuul:
   routes:
-    test:
-      path: /test/**
+    vlep-business:
+      path: /vlep-business/**
       serviceId: vlep-business
-
-endpoints:
-  shutdown:
-    enabled: true
-  restart:
-    enabled: true
-
-timestamp.validate.limit: 180
+  #表示禁止zuul中默认的映射
+  ignored-services: '*'
+  #为匹配路径增加前缀
+  #prefix: /api

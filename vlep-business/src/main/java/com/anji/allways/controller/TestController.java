@@ -3,10 +3,7 @@ package com.anji.allways.controller;
 import com.anji.allways.common.aop.LoggerManage;
 import com.anji.allways.common.entity.BaseResponseModel;
 import com.anji.allways.service.TestService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
@@ -34,12 +31,22 @@ public class TestController {
     public BaseResponseModel hello(@PathVariable("name")String name){
         return BaseResponseModel.ofSuccessMessage("Hello "+name);
     }
-    @GetMapping("/redis")
+    @PostMapping("/redis")
+    @LoggerManage(description = "redis测试")
     public BaseResponseModel redis(){
-        Jedis jedis = jedisPool.getResource();
-        jedis.set("测试","测试");
-        String test=jedis.get("测试");
-        jedis.close();
-        return BaseResponseModel.ofSuccessData(test);
+        Jedis jedis = null;
+        try {
+            jedis = jedisPool.getResource();
+            jedis.set("测试", "测试");
+            String test = jedis.get("测试");
+            return BaseResponseModel.ofSuccessData(test);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (jedis!=null){
+                jedis.close();
+            }
+        }
+        return null;
     }
 }
