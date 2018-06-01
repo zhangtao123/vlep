@@ -6,7 +6,9 @@ dependencies {
     compile('org.apache.poi:poi-ooxml:3.17')
     compile('redis.clients:jedis')
     compile('org.springframework.boot:spring-boot-starter-data-redis')
-    compile fileTree(dir: 'libs', include: '*.jar')
+//    compile fileTree(dir: 'libs', include: '*.jar')
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-web')
 }
+
+//mainClassName = 'com.anji.allways.allways-common'
