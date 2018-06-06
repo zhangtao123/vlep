@@ -2,7 +2,5 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
     testCompile('org.springframework.boot:spring-boot-starter-test')
     compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-zuul', version: '1.4.4.RELEASE'
-
-
 }
 

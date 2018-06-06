@@ -46,3 +46,6 @@ eureka:
 management:
   security:
     enabled: false
+
+#全局超时时间设置
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 60000

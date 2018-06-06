@@ -16,13 +16,13 @@ public class BaseRequestModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String            token;
+    private String token;
 
-    private String            userId;
+    private String userId;
 
-    private String            sign;
+    private String sign;
 
-    private String            time;
+    private String time;
 
     private JSONObject reqData;
 
